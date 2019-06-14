@@ -117,6 +117,22 @@ endef
 $(eval $(call KernelPackage,can-c-can-platform))
 
 
+define KernelPackage/can-sun4i
+  TITLE:=Allwinner A10 CAN controller
+  KCONFIG:=CONFIG_CAN_SUN4I
+  FILES:=$(LINUX_DIR)/drivers/net/can/sun4i_can.ko
+  AUTOLOAD:=$(call AutoProbe,sun4i_can)
+  $(call AddDepends/can,@TARGET_sunxi_cortexa7)
+endef
+
+define KernelPackage/can-sun4i/description
+ Say Y here if you want to use CAN controller found on
+ Allwinner A10/A20 SoCs.
+endef
+
+$(eval $(call KernelPackage,can-sun4i))
+
+
 define KernelPackage/can-flexcan
   TITLE:=Support for Freescale FLEXCAN based chips
   KCONFIG:=CONFIG_CAN_FLEXCAN
